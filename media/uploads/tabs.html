@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vertical Tabs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .tab-container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .tabs {
+      background-color: #333;
+      color: #fff;
+      width: 150px;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .tab {
+      cursor: pointer;
+      padding: 10px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .tab:hover {
+      background-color: #555;
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tab-container">
+  <div class="tabs">
+    <div class="tab" onclick="openTab('tab1')">Tab 1</div>
+    <div class="tab" onclick="openTab('tab2')">Tab 2</div>
+    <div class="tab" onclick="openTab('tab3')">Tab 3</div>
+    <!-- Add more tabs as needed -->
+
+    <!-- JavaScript function to handle tab switching -->
+    <script>
+      function openTab(tabName) {
+        var i;
+        var tabs = document.getElementsByClassName("content");
+        for (i = 0; i < tabs.length; i++) {
+          tabs[i].style.display = "none";
+        }
+
+        document.getElementById(tabName).style.display = "block";
+      }
+    </script>
+  </div>
+
+  <div class="content" id="tab1">
+    <h2>Tab 1 Content</h2>
+    <p>This is the content for Tab 1.</p>
+  </div>
+
+  <div class="content" id="tab2" style="display: none;">
+    <h2>Tab 2 Content</h2>
+    <p>This is the content for Tab 2.</p>
+  </div>
+
+  <div class="content" id="tab3" style="display: none;">
+    <h2>Tab 3 Content</h2>
+    <p>This is the content for Tab 3.</p>
+  </div>
+  <!-- Add more content sections as needed -->
+</div>
+
+</body>
+</html>

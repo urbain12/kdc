@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>KDC Admin</title>
+    <link rel="stylesheet" href="{% static "admin/vendors/feather/feather.css"%}" />
+    <link rel="stylesheet" href="{% static "admin/vendors/ti-icons/css/themify-icons.css" %}"/>
+    <link rel="stylesheet" href="{% static "admin/vendors/css/vendor.bundle.base.css"  %}"/>
+    <link rel="stylesheet" href="{% static "admin/css/vertical-layout-light/style.css" %}" />
+    <link rel="shortcut icon" href="{% static "admin/images/favicon.png" %}" />
+  </head>
+
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div
+          class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"
+        >
+          <a class="navbar-brand brand-logo mr-5" href="{% url "Dashboard" %}"
+            ><img src="{% static "admin/images/logo.png" %}" class="mr-2" alt="logo"
+          /></a>
+          <a class="navbar-brand brand-logo-mini" href="{% url "Dashboard" %}"
+            ><img src="{% static "admin/images/logo.png" %}" alt="logo"
+          /></a>
+        </div>
+        <div
+          class="navbar-menu-wrapper d-flex align-items-center justify-content-end"
+        >
+          <button
+            class="navbar-toggler navbar-toggler align-self-center"
+            type="button"
+            data-toggle="minimize"
+          >
+            <span class="icon-menu"></span>
+          </button>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                data-toggle="dropdown"
+                id="profileDropdown"
+              >
+                <img src="{% static  "admin/images/faces/face28.jpg" %}" alt="profile" />
+              </a>
+              <div
+                class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                aria-labelledby="profileDropdown"
+              >
+                <a class="dropdown-item">
+                  <i class="ti-power-off text-primary"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container-fluid page-body-wrapper">
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "Dashboard" %}">
+                <i class="icon-grid menu-icon"></i>
+                <span class="menu-title">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="{% url "appointments_list" %}" >
+                <i class="icon-columns menu-icon"></i>
+                <span class="menu-title">Appointments</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="{% url "result_list" %}">
+                <i class="icon-grid-2 menu-icon"></i>
+                <span class="menu-title">Results</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="{% url "kdclogout" %}">
+                <i class="icon-head menu-icon"></i>
+                <span class="menu-title">Logout</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Cancelled Appointments</h4>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                            <tr style="background:#57B0DD">
+                            <th>Names</th>
+                            <th>Phone</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Type</th>
+                            <th>Insurance</th>
+                            <th>Reason</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for appointment in page_obj  %}
+                          <tr>
+                              <td>{{ appointment.names }}</td>
+                              <td>{{ appointment.phone }}</td>
+                              <td>{{ appointment.date|date:"Y/m/d" }}</td>
+                              <td>{{ appointment.time}}</td>
+                              <td>{{ appointment.appointment_type }}</td>
+                              <td>{{ appointment.insurance }}</td>
+                              <td>{{ appointment.reason }}</td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="pagination">
+                        <span class="step-links" style="margin-top:30px;">
+                            {% if page_obj.has_previous %}
+                                <a class="btn  mb-4" href="?page=1" style="margin-top: 20px; border: 1px solid #000; padding: 5px 10px; text-decoration: none;">&laquo; first</a>
+                                <a class="btn  mb-4" href="?page={{ page_obj.previous_page_number }}" style="margin-top: 20px; border: 1px solid #000; padding: 5px 10px; text-decoration: none;">previous</a>
+                            {% endif %}
+        
+                            <span class="current">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                            </span>
+        
+                            {% if page_obj.has_next %}
+                            <a class="btn mb-4" href="?page={{ page_obj.next_page_number }}"  style="margin-top: 20px; border: 1px solid #000; padding: 5px 10px; text-decoration: none;">next</a>
+                            <a class="btn mb-4" href="?page={{ page_obj.paginator.num_pages }}"  style="margin-top: 20px; border: 1px solid #000; padding: 5px 10px; text-decoration: none;">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="footer">
+            <div
+              class="d-sm-flex justify-content-center justify-content-sm-between"
+            >
+              <span
+                class="text-muted text-center text-sm-left d-block d-sm-inline-block"
+                >Copyright © 2024.All rights reserved.</span
+              >
+              <span
+                class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"
+                >Kigali Dermatology Center<i
+                  class="ti-heart text-danger ml-1"
+                ></i
+              ></span>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+    <script src="{% static "admin/vendors/js/vendor.bundle.base.js" %}"></script>
+    <script src="{% static "admin/js/off-canvas.js" %}"></script>
+    <script src="{% static "admin/js/hoverable-collapse.js" %}"></script>
+    <script src="{% static "admin/js/template.js" %}"></script>
+    <script src="{% static "admin/js/settings.js" %}"></script>
+    <script src="{% static "admin/js/todolist.js" %}"></script>
+  </body>
+</html>
