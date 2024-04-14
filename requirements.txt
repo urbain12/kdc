@@ -20,7 +20,6 @@ et-xmlfile==1.1.0
 idna==3.3
 MarkupPy==1.14
 mypy-extensions==0.4.3
-mysqlclient==2.2.0
 oauthlib==3.2.1
 odfpy==1.4.1
 openpyxl==3.0.10
