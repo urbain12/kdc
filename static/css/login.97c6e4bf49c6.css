@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Mulish', sans-serif;
+}
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: white;
+  background-size: cover;
+  background-position: center;
+}
+.wrapper{
+  width: 420px;
+  background:white;
+  border: 2px solid rgba(255, 255, 255, .2);
+  backdrop-filter: blur(9px);
+  color: #fff;
+  border-radius: 12px;
+  padding: 30px 40px;
+  margin-top: 60px;
+  
+}
+.wrapper h1{
+  font-size: 36px;
+  text-align: center;
+  color:  black;
+}
+.wrapper .input-box{
+  position: relative;
+  width: 100%;
+  height: 50px;
+  }
+.input-box :hover{
+  
+  background-color:white;
+  box-shadow: #147df51a 0px 8px 24px, rgba(28, 28, 172, 0.1) 0px 16px 56px, rgba(23, 23, 205, 0.1) 0px 24px 80px;
+}
+
+.input-box input{
+  width: 100%;
+  height: 100%;
+  background:  white;
+  border: none;
+  outline: none;
+  border: 2px solid  #1472f4;
+  border-radius: 40px;
+  font-size: 16px;
+  color:black;
+  padding: 20px 45px 20px 20px;
+  margin-top: 20px;
+ 
+   
+}
+
+
+
+
+.input-box input::placeholder{
+  color:  #1472f4;;
+}
+.input-box i{
+  position: absolute;
+  right: 20px;
+  top: 30%;
+  transform: translate(-50%);
+  font-size: 20px;
+  margin-top: 20px;
+  color: black;
+
+}
+.wrapper .remember-forgot{
+  display: flex;
+  justify-content: space-between;
+  font-size: 14.5px;
+  margin: -15px 0 15px;
+  color: black;
+  margin-top: 70px;
+}
+.remember-forgot label input{
+  accent-color: #050000;
+  margin-right: 3px;
+
+}
+.remember-forgot a{
+  color: #070000;
+  text-decoration: none;
+
+}
+.remember-forgot a:hover{
+  text-decoration: underline;
+}
+
+.remember-forgot1 a{
+  color: #1472f4;
+  text-decoration: none;
+  padding-left: 110px;
+  
+
+}
+.remember-forgot1 a:hover{
+  text-decoration: underline;
+}
+
+.wrapper .btn{
+  width: 100%;
+  height: 45px;
+  background:  #1472f4;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px  #1472f4;
+  cursor: pointer;
+  font-size: 16px;
+  color: #faf7f7;
+  font-weight: 600;
+}
+.wrapper .register-link{
+  font-size: 14.5px;
+  text-align: center;
+  margin: 20px 0 15px;
+
+}
+.register-link p a{
+  color:  #1472f4;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link p {
+  color: #080000;
+  text-decoration: none;
+  font-weight: 600;
+}
+.register-link p a:hover{
+  text-decoration: underline;
+}
+
