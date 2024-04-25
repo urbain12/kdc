@@ -20,10 +20,19 @@ from rest_framework import viewsets, mixins, status
 from rest_framework.decorators import action
 from django.utils.timezone import now
 from datetime import datetime, timedelta
+import pytz
 import math
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+import requests
+from django.contrib import auth
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+
+
+
 
 
 from django.contrib.auth import (
@@ -40,33 +49,49 @@ def index(request):
 def successmsg(request):
     return render(request, 'success.html')
 
+def new_result(request):
+    return render(request, 'useradmin/sendresult.html')
+
 
 def Dashboard(request):
-    alllist = len(Appointment.objects.all())
+    allappointment = len(Appointment.objects.all())
+    confirmed=len(Appointment.objects.filter(confirmed=True))
+    cancelled=len(Appointment.objects.filter(rejected=True))
+    pending=len(Appointment.objects.filter(rejected=False,confirmed=False))
+    
+    kigali_timezone = pytz.timezone('Africa/Kigali')
+    current_time_kigali = datetime.now(kigali_timezone).strftime('%Y-%m-%d - %H:%M')
     return render(
         request,
-        "admin/dashboard.html",
+        "useradmin/dashboard.html",
         {
-            "alllist": alllist,
+            "allappointment": allappointment,
+            'cancelled':cancelled,
+            'confirmed':confirmed,
+            'pending':pending,
+            'current_time_kigali': current_time_kigali,
+
         },
     )
 
 def kdclogin(request):
     if request.method == "POST":
         user = authenticate(
-            email=request.POST["email"], password=request.POST["password"]
+            email=request.POST["email"], 
+            password=request.POST["password"]
         )
+        print(user)
         if user is not None:
-            django_login(request, user)
+            auth.login(request, user)
             return redirect("Dashboard")
         else:
             return render(
                 request,
-                "admin/login.html",
+                "useradmin/login.html",
                 {"error": "Your Email or Password are incorrect. "},
             )
     else:
-        return render(request, "admin/login.html")
+        return render(request, "useradmin/login.html")
     
 def kdclogout(request):
     django_logout(request)
@@ -88,14 +113,105 @@ def add_appointment(request):
     else:
         return render(request, "index.html")
     
-
+def cancel_page(request,appointmentID):
+    appointment=Appointment.objects.get(id=appointmentID)
+    return render(request,'useradmin/cancel.html',{'appointment':appointment})
+    
+def cancel(request,appointmentID):
+    if request.method=="POST":
+        appointment=Appointment.objects.get(id=appointmentID)
+        appointment.rejected=True
+        appointment.confirmed=False
+        appointment.reason= request.POST['reason']
+        appointment.save()
+        payload={'details':f'Dear {appointment.names},\nWe are sorry to inform you that your appointment at {appointment.date} has been cancelled due to {request.POST["reason"]}. For rescheduling  your appointment please call +250 782 742 943 / 252 604 144','phone':f'25{appointment.phone}'}
+        headers = {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdXBjb3VudHJ5LnRpY2tldC5ydy9hcGkvbW9iaWxlL2F1dGhlbnRpY2F0ZSIsImlhdCI6MTcwMjQwMTkzMSwiZXhwIjoxNzAyNDA1NTMxLCJuYmYiOjE3MDI0MDE5MzEsImp0aSI6IkM2dkY1b3V0cXplRGg4TG4iLCJzdWIiOiIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.LqRhq-8muztNIOLwyl8MDV2xXEFnXfJilwJc4E6w7og'}
+        r = requests.post('http://upcountry.ticket.rw/api/send-sms-kwetu',
+                      headers=headers, data=payload, verify=False)
+        return redirect('cancelled')
+    
+    
+def confirm(request,appointmentID):
+    if request.method=="POST":
+        appointment=Appointment.objects.get(id=appointmentID)
+        appointment.rejected=False
+        appointment.confirmed=True
+        appointment.save()
+        payload={'details':f'Dear {appointment.names},\nWe are to inform you that your appointment at {appointment.date} has been confirmed.please call +250 782 742 943 / 252 604 144','phone':f'25{appointment.phone}'}
+        headers = {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdXBjb3VudHJ5LnRpY2tldC5ydy9hcGkvbW9iaWxlL2F1dGhlbnRpY2F0ZSIsImlhdCI6MTcwMjQwMTkzMSwiZXhwIjoxNzAyNDA1NTMxLCJuYmYiOjE3MDI0MDE5MzEsImp0aSI6IkM2dkY1b3V0cXplRGg4TG4iLCJzdWIiOiIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.LqRhq-8muztNIOLwyl8MDV2xXEFnXfJilwJc4E6w7og'}
+        r = requests.post('http://upcountry.ticket.rw/api/send-sms-kwetu',
+                      headers=headers, data=payload, verify=False)
+        return redirect('appointments_list')
+   
 
 def appointments_list(request):
     appointments = Appointment.objects.all()
     search_query = request.GET.get("search", "")
     if search_query:
         appointments = Appointment.objects.filter(Q(names__icontains=search_query))
+        
     paginator = Paginator(appointments, 6)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return render(request, "admin/dashboardapp.html", {"appointments": appointments, "page_obj": page_obj})
+    return render(request, "useradmin/appointment.html", {"appointments": appointments, "page_obj": page_obj})
+
+def cancelled(request):
+    appointments = Appointment.objects.filter(rejected=True)
+    search_query = request.GET.get("search", "")
+    if search_query:
+        appointments = Appointment.objects.filter(Q(names__icontains=search_query))
+    paginator = Paginator(appointments, 6)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, "useradmin/cancelled.html", {"appointments": appointments, "page_obj": page_obj})
+
+def reminder(request,Appointmentid):
+    appointment=Appointment.objects.get(id=Appointmentid)
+    payload={'details':f' Dear {appointment.names},\nThis is to remind you that you have an appointment on {appointment.date} at kdc. Please call us for any cancellation or delay through +250 782 742 943 / 252 604 144 ','phone':f'25{appointment.phone}'}
+    headers = {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdXBjb3VudHJ5LnRpY2tldC5ydy9hcGkvbW9iaWxlL2F1dGhlbnRpY2F0ZSIsImlhdCI6MTcwMjQwMTkzMSwiZXhwIjoxNzAyNDA1NTMxLCJuYmYiOjE3MDI0MDE5MzEsImp0aSI6IkM2dkY1b3V0cXplRGg4TG4iLCJzdWIiOiIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.LqRhq-8muztNIOLwyl8MDV2xXEFnXfJilwJc4E6w7og'}
+    r = requests.post('http://upcountry.ticket.rw/api/send-sms-kwetu',
+                      headers=headers, data=payload, verify=False)
+    return redirect('appointments_list')
+
+def send_result(request):
+    if request.method == "POST":
+        new_result = Result()
+        new_result.name = request.POST["name"]
+        new_result.phonenumber = request.POST["phone"]
+        new_result.fileupload = request.FILES.get("file")
+        new_result.save()
+        payload={'details':f'Dear {new_result.name},\n Here is your result http://127.0.0.1:8000/{new_result.fileupload.url}.','phone':f'25{new_result.phonenumber}'}
+        headers = {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdXBjb3VudHJ5LnRpY2tldC5ydy9hcGkvbW9iaWxlL2F1dGhlbnRpY2F0ZSIsImlhdCI6MTcwMjQwMTkzMSwiZXhwIjoxNzAyNDA1NTMxLCJuYmYiOjE3MDI0MDE5MzEsImp0aSI6IkM2dkY1b3V0cXplRGg4TG4iLCJzdWIiOiIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.LqRhq-8muztNIOLwyl8MDV2xXEFnXfJilwJc4E6w7og'}
+        r = requests.post('http://upcountry.ticket.rw/api/send-sms-kwetu',
+                      headers=headers, data=payload, verify=False)
+        return redirect("result_list")
+    else:
+        return render(request, "useradmin/dashboard.html")
+    
+    
+def result_list(request):
+    results = Result.objects.all()
+    search_query = request.GET.get("search", "")
+    if search_query:
+        results = Result.objects.filter(Q(name__icontains=search_query))
+    paginator = Paginator(results, 6)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, "useradmin/result.html", {"results": results, "page_obj": page_obj})
+
+
+def resendresult(request,Resultid):
+    result=Result.objects.get(id=Resultid)
+    payload={'details':f'Dear {result.name},\nHere is your result http://localhost:8000/{result.fileupload.url}.','phone':f'25{result.phonenumber}'}
+    headers = {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdXBjb3VudHJ5LnRpY2tldC5ydy9hcGkvbW9iaWxlL2F1dGhlbnRpY2F0ZSIsImlhdCI6MTcwMjQwMTkzMSwiZXhwIjoxNzAyNDA1NTMxLCJuYmYiOjE3MDI0MDE5MzEsImp0aSI6IkM2dkY1b3V0cXplRGg4TG4iLCJzdWIiOiIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.LqRhq-8muztNIOLwyl8MDV2xXEFnXfJilwJc4E6w7og'}
+    r = requests.post('http://upcountry.ticket.rw/api/send-sms-kwetu',
+                      headers=headers, data=payload, verify=False)
+    return redirect('result_list')
+
+
+def reminder(request,Appointmentid):
+    appointment=Appointment.objects.get(id=Appointmentid)
+    payload={'details':f' Dear {appointment.names},\nThis is to remind you that you have an appointment on {appointment.date} at Kigali dematology center. Please call us for any cancellation or delay through +250 782 742 943 / 252 604 144 ','phone':f'25{appointment.phone}'}
+    headers = {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdXBjb3VudHJ5LnRpY2tldC5ydy9hcGkvbW9iaWxlL2F1dGhlbnRpY2F0ZSIsImlhdCI6MTcwMjQwMTkzMSwiZXhwIjoxNzAyNDA1NTMxLCJuYmYiOjE3MDI0MDE5MzEsImp0aSI6IkM2dkY1b3V0cXplRGg4TG4iLCJzdWIiOiIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.LqRhq-8muztNIOLwyl8MDV2xXEFnXfJilwJc4E6w7og'}
+    r = requests.post('http://upcountry.ticket.rw/api/send-sms-kwetu',headers=headers, data=payload, verify=False)
+    return redirect('appointments_list')
