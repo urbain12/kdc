@@ -46,7 +46,7 @@
                 data-toggle="dropdown"
                 id="profileDropdown"
               >
-                <img src="{% static  "admin/images/faces/face28.jpg" %}" alt="profile" />
+                <img src="{% static  "img/iconuser.png" %}" alt="profile" />
               </a>
               <div
                 class="dropdown-menu dropdown-menu-right navbar-dropdown"
@@ -117,6 +117,7 @@
                             <th>Phone</th>
                             <th>Date</th>
                             <th>Type</th>
+                            <th>Doctor</th>
                             <th>Insurance</th>
                             <th>Active</th>
                           </tr>
@@ -128,6 +129,7 @@
                               <td>{{ appointment.phone }}</td>
                               <td>{{ appointment.date|date:"Y/m/d" }}</td>
                               <td>{{ appointment.appointment_type }}</td>
+                              <td>{{ appointment.doctor }}</td>
                               <td>{{ appointment.insurance }}</td>
                               <td>
                                   {% if appointment.appointment_status == 'Requested' %}

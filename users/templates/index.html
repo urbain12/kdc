@@ -68,7 +68,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Book</span> Appointment</a>
+      <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Book an</span> appointment</a>
 
     </div>
   </header><!-- End Header -->
@@ -135,7 +135,7 @@
 
             <div class="icon-box">
               <div class="icon"><i class="bx bx-atom"></i></div>
-              <h4 class="title"><a href="">Our Value</a></h4>
+              <h4 class="title"><a href="">Our Values</a></h4>
               <p class="description">Respect , Integrity, Quality-orientation, Kaizen: a Japanese word that means "Continous Improvement"</p>
             </div>
 
@@ -273,8 +273,8 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Book Appointment</h2>
-          <p>Fill the form below to book an appointmentat Kigali Dermatology Center</p>
+          <h2>Book an appointment</h2>
+          <p>Fill the form below to book an appointment Kigali Dermatology Center</p>
         </div>
 
         <form action="{% url 'add_appointment' %}" method="POST" >
@@ -308,7 +308,7 @@
                 <option value="">Select Insurance</option>
                 <option value="Britam">Britam</option>
                 <option value="Coge banque">Cogebanque</option>
-                <option value="Christian Life Assembly">Christian Life Assembly (CLA)</option>
+                <option value="Dr Antoine Burabyo Rudasigwa">Christian Life Assembly (CLA)</option>
                 <option value="Henner">Henner</option>
                 <option value="Radiant">Radiant</option>
                 <option value="RSSB">RSSB</option>
@@ -319,6 +319,16 @@
                 <option value="Private/Non Insurance">Private/Non Insurance</option>
               </select>
             </div>
+          </div>
+
+          <div class="col-md-12 form-group mt-3">
+            <select name="doctor" id="doctor" class="form-select">
+              <option value="">Choosse Doctor</option>
+              <option value="Dr Kayitesi Kayitenkore">Dr Kayitesi Kayitenkore</option>
+              <option value="Dr Sadah Uwase">Dr Sadah Uwase</option>
+              <option value="Dr Antoine Burabyo Rudasigwa">Dr Antoine Burabyo Rudasigwa</option>
+              <option value="Dr Frida Bazirisa">Dr Frida Bazirisa</option>
+            </select>
           </div>
 
           <div class="form-group mt-3">
@@ -462,7 +472,6 @@
               <div class="member-info">
                 <h4>Dr Sadah Uwase</h4>
                 <span>Dermatologist</span>
-                <p>Received a Doctorate in Medicine from Universite Libre de Bruxelles.</p>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>
@@ -479,7 +488,6 @@
               <div class="member-info">
                 <h4>Dr Antoine Burabyo Rudasigwa</h4>
                 <span>Dermatologist</span>
-                <p>Received a Doctorate in Medicine from Universite Libre de Bruxelles.</p>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>
@@ -492,11 +500,10 @@
 
           <div class="col-lg-6 mt-4">
             <div class="member d-flex align-items-start">
-              <div class="pic"><img src="{% static  "img/logo.png" %}" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{% static  "img/doctors/frida.jpeg" %}" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Dr Frida Bazirisa</h4>
                 <span>Dermatologist</span>
-                <p>Received a Doctorate in Medicine from Universite Libre de Bruxelles.</p>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>
@@ -674,37 +681,53 @@
             </div>
           </div>
 
-       <!--  <div class="col-lg-3 col-md-4">
+        <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="{% static  "img/gallery/gallery-5.jpg" %}" class="galelry-lightbox">
-                <img src="{% static  "img/gallery/gallery-5.jpg" %}" alt="" class="img-fluid">
+              <a href="{% static  "img/gallery/1.jpg" %}" class="galelry-lightbox">
+                <img src="{% static  "img/gallery/1.jpg" %}" alt="" class="img-fluid">
               </a>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="{% static  "img/gallery/gallery-6.jpg" %}" class="galelry-lightbox">
-                <img src="{% static  "img/gallery/gallery-6.jpg" %}" alt="" class="img-fluid">
+              <a href="{% static  "img/gallery/2.jpg" %}" class="galelry-lightbox">
+                <img src="{% static  "img/gallery/2.jpg" %}" alt="" class="img-fluid">
               </a>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="{% static  "img/gallery/gallery-7.jpg" %}" class="galelry-lightbox">
-                <img src="{% static  "img/gallery/gallery-7.jpg" %}" alt="" class="img-fluid">
+              <a href="{% static  "img/gallery/3.jpg" %}" class="galelry-lightbox">
+                <img src="{% static  "img/gallery/3.jpg" %}" alt="" class="img-fluid">
               </a>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="{% static  "img/gallery/gallery-8.jpg" %}" class="galelry-lightbox">
-                <img src="{% static  "img/gallery/gallery-8.jpg" %}" alt="" class="img-fluid">
+              <a href="{% static  "img/gallery/4.jpg" %}" class="galelry-lightbox">
+                <img src="{% static  "img/gallery/4.jpg" %}" alt="" class="img-fluid">
               </a>
             </div>
-          </div> --> 
+          </div> 
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{% static  "img/gallery/5.jpg" %}" class="galelry-lightbox">
+                <img src="{% static  "img/gallery/5.jpg" %}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div> 
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{% static  "img/gallery/6.jpg" %}" class="galelry-lightbox">
+                <img src="{% static  "img/gallery/6.jpg" %}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div> 
 
         </div>
 
@@ -740,6 +763,7 @@
               <div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Call:</h4>
+                <p> Toll Free: 2017</p>
                 <p> +250 782 742 943 / 252 604 144</p>
               </div>
 
@@ -819,7 +843,8 @@
               <li><i class="bx bx-chevron-right"></i> <a href="#services">Surgical Dermatology</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#services">Pediatric Dermatology</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#services">Dermato-Allergology</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#services">Specialized Laboratory Targeted Phototherapy</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#services">Specialized Laboratory</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#services">Targeted Phototherapy</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#services">Aesthetic Primers</a></li>
             </ul>
             

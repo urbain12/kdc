@@ -107,6 +107,7 @@ def add_appointment(request):
         new_appointment.date = request.POST["date"]
         new_appointment.appointment_type = request.POST["appointment_type"]
         new_appointment.insurance = request.POST.get("insurance")
+        new_appointment.doctor = request.POST.get("doctor")
         new_appointment.message = request.POST["message"]
         new_appointment.save()
         return redirect("successmsg")

@@ -72,6 +72,7 @@ class Appointment(models.Model):
     time = models.TimeField(null=True, blank=True)
     appointment_type = models.CharField(max_length=100 ,null=True, blank=True)
     insurance = models.CharField(max_length=100 ,null=True, blank=True)
+    doctor = models.CharField(max_length=100 ,null=True, blank=True)
     message = models.TextField(null=True,blank=True)
     reason= models.CharField(max_length=100, blank=True, null=True)
     confirmed = models.BooleanField(default=False,null=True, blank=True)
