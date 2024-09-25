@@ -19,5 +19,6 @@ urlpatterns = [
     path('confirm/<int:appointmentID>',confirm,name="confirm"),
     path('result_list/', result_list, name='result_list'),
     path('resend/<int:Resultid>',resendresult,name="resend"),
+    path('confirm_page/<int:appointmentID>',confirm_page,name="confirm_page"),
 
 ]

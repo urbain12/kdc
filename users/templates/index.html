@@ -33,6 +33,60 @@
   <!-- Template Main CSS File -->
   <link href= "{% static  "css/style.css" %}" rel="stylesheet">
 
+  <style>
+  .timetable {
+      width: 80%;
+      max-width: 1000px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: auto; 
+      margin-bottom:20px
+  }
+    
+  table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed; /* Ensures equal-width columns */
+  }
+  th, td {
+      padding: 15px;
+      text-align: center;
+      word-wrap: break-word;
+      border: 1px solid #ddd;
+      width: 50%; /* Ensures equal width for both Doctor and Days Worked */
+  }
+  
+  th {
+      background-color: #4CAF50;
+      color: white;
+      text-transform: uppercase;
+  }
+  
+  td {
+      background-color: #f9f9f9;
+      color: #333;
+  }
+  
+  .dr-kayitesi {
+      background-color: #ffcccb;
+  }
+  
+  .dr-uwase {
+      background-color: #d1e7dd;
+  }
+  
+  .dr-burabyo {
+      background-color: #cfe2ff;
+  }
+  
+  .dr-bazirisa {
+      background-color: #f8d7da;
+  }
+  
+</style>
+
 </head>
 
 <body>
@@ -62,9 +116,9 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#about">About us</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#doctors">Doctors</a></li>
+          <li><a class="nav-link scrollto" href="#doctors">Team</a></li>
           <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
@@ -96,9 +150,10 @@
             <div class="content">
               <h3>Opening Hours</h3>
               <p>
-                <li><strong>Monday-Friday:</strong> 8am-5pm</li>
+                <li><strong>Monday-Friday:</strong> 8am-6pm</li>
                 <li><strong>Saturday:</strong> 9am-5pm</li>
-                <li><strong>Sunday:</strong> 9am-2pm</li>
+                <li><strong>Sunday:</strong> 9am-3pm</li>
+                <li><strong>Close on Public Holiday</strong></li>
               </p>
               <p>
               Morning: First come First served<br> 
@@ -116,11 +171,9 @@
       <div class="container-fluid">
 
         <div class="row">
-        <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch position-relative">
-            <a href="{% static 'img/kdcvid1.mp4' %}" class="glightbox play-btn mb-4" data-type="video" data-autoplay="true">
-              
-            </a>
-          </div>
+          <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch position-relative">
+            <video src="{% static 'img/kdcvideofinal.mp4' %}" autoplay muted loop playsinline controls></video>
+        </div>
           
           
 
@@ -167,7 +220,7 @@
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
-              <img src="{% static  "img/cogebank.png" %}" alt="" class="partners">
+              <img src="{% static  "img/urwego.png" %}" alt="" class="partners">
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
@@ -275,6 +328,140 @@
       </div>
     </section><!-- End Services Section -->
 
+
+    <!-- ======= Doctors Section ======= -->
+    <section id="doctors" class="doctors">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Doctors</h2>
+          <p>Meet our expert dermatologists at Kigali Dermatology Center, delivering personalized care for your skin's health and radiance</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start">
+              <div class="pic">
+                <img src="{% static 'img/doctors/kayitesi.jpg' %}" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4>Dr Kayitesi Kayitenkore</h4>
+                <span>Chief Medical Officer</span>
+                <p id="bio">
+                  Kayitenkore serves as the Managing Director of the Kigali Dermatology Center  With an experience of more than 20 years in Dermatology. 
+                  <span id="dots">...</span>
+                  <span id="more" style="display: none;">
+                    she brings expertise and
+                    leadership to ensure the delivery of high-quality dermatological care.
+                    Dr Kayitesi Kayitenkore earned her Doctorate in Medicine from the Université Libre
+                    de Bruxelles (Belgium) and her Master's in Dermatology from the Medical University
+                    of Southern Africa (South Africa). She is the holder of several diplomas such as
+                    Tropical Medicine (Antwerpen, Belgium), Epidemiology (London School of Hygiene
+                    and Tropical Medicine, UK), and Allergology (DUFRAL).
+                    As a founding member, she contributes to the Rwanda Dermatology Society (RDS)
+                    and the African Society of Dermatology and Venereology (ASDV).
+                    Additionally, Dr. Kayitenkore is a member of the European Society of
+                    Dermatology and Venereology (EADV)
+                  </span>
+                </p>
+                <a href="javascript:void(0);" onclick="toggleReadMore()" id="readMoreBtn">Read more</a>
+                <div class="social">
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href=""><i class="ri-instagram-fill"></i></a>
+                  <a href=""><i class="ri-linkedin-box-fill"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4 mt-lg-0">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="{% static  "img/doctors/sadadp.jpg" %}" class="img-fluid" alt="" style="border-radius:50%"></div>
+              <div class="member-info">
+                <h4>Dr Sadah Uwase</h4>
+                <span>Dermatologist</span>
+                <div class="social">
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href=""><i class="ri-instagram-fill"></i></a>
+                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="{% static  "img/logo.png" %}" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Dr Antoine Burabyo Rudasigwa</h4>
+                <span>Dermatologist</span>
+                <div class="social">
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href=""><i class="ri-instagram-fill"></i></a>
+                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="{% static  "img/doctors/frida.jpeg" %}" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Dr Frida Bazirisa</h4>
+                <span>Dermatologist</span>
+                <div class="social">
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href=""><i class="ri-instagram-fill"></i></a>
+                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Doctors Section -->
+
+    <div class="timetable">
+      <div class="section-title">
+        <h2>Doctors Timetable</h2>
+      </div>
+      <table>
+          <thead>
+              <tr>
+                  <th>Doctor</th>
+                  <th>Days Worked</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>Dr Kayitesi Kayitenkore</td>
+                  <td class="dr-kayitesi">Monday, Wednesday, Friday</td>
+              </tr>
+              <tr>
+                  <td>Dr Sada Uwase</td>
+                  <td class="dr-uwase">Monday, Tuesday, Wednesday, Friday</td>
+              </tr>
+              <tr>
+                  <td>Dr Antoine Burabyo</td>
+                  <td class="dr-burabyo">Thursday, Sunday</td>
+              </tr>
+              <tr>
+                  <td>Dr Frida Bazirisa</td>
+                  <td class="dr-bazirisa">Saturday</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+  
+
     <!-- ======= Appointment Section ======= -->
     <section id="appointment" class="appointment section-bg">
       <div class="container">
@@ -314,7 +501,6 @@
               <select name="insurance" id="doctor" class="form-select">
                 <option value="">Select Insurance</option>
                 <option value="Britam">Britam</option>
-                <option value="Coge banque">Cogebanque</option>
                 <option value="Dr Antoine Burabyo Rudasigwa">Christian Life Assembly (CLA)</option>
                 <option value="Henner">Henner</option>
                 <option value="Radiant">Radiant</option>
@@ -323,7 +509,7 @@
                 <option value="UAP/OldMutual">UAP_Old Mutual</option>
                 <option value="Urwego Opportunity Bank">Urwego Opportunity Bank (UOB)</option>
                 <option value="Prime Insurance">Prime Insurance</option>
-                <option value="Private/Non Insurance">Private/Non Insurance</option>
+                <option value="Private/Non Insured">Private/Non Insured</option>
               </select>
             </div>
           </div>
@@ -445,86 +631,7 @@
       </div>
     </section> End Departments Section-->
 
-    <!-- ======= Doctors Section ======= -->
-    <section id="doctors" class="doctors">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Doctors</h2>
-          <p>Meet our expert dermatologists at Kigali Dermatology Center, delivering personalized care for your skin's health and radiance</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-6">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="{% static  "img/doctors/kayitesi.jpg" %}" class="img-fluid" alt="" ></div>
-              <div class="member-info">
-                <h4>Dr Kayitesi Kayitenkore</h4>
-                <span>Chief Medical Officer</span>
-                <p>Received a Doctorate in Medicine from Universite Libre de Bruxelles.</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4 mt-lg-0">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="{% static  "img/doctors/sada.jpg" %}" class="img-fluid" alt="" style="border-radius:50%"></div>
-              <div class="member-info">
-                <h4>Dr Sadah Uwase</h4>
-                <span>Dermatologist</span>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="{% static  "img/logo.png" %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Dr Antoine Burabyo Rudasigwa</h4>
-                <span>Dermatologist</span>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="{% static  "img/doctors/frida.jpeg" %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Dr Frida Bazirisa</h4>
-                <span>Dermatologist</span>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Doctors Section -->
+    
 
     <!-- ======= Frequently Asked Questions Section ======= -->
     <section id="faq" class="faq section-bg">
@@ -758,7 +865,7 @@
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
                 <h4>Location:</h4>
-                <p> 43 KG 5 Ave, Kigali</p>
+                <p> 43,  KG 5 Ave, Kigali-Kacyiru</p>
               </div>
 
               <div class="email">
@@ -825,7 +932,7 @@
 
           <div class="col-lg-4 col-md-6 footer-contact">
             <h3>Kigali Dermatology Center</h3>
-              KG 5 Ave 43, Kacyiru<br>
+            43,  KG 5 Ave, Kigali-Kacyiru<br>
               Kigali, Rwanda <br>
               <strong>Phone:</strong> +250 782 742 943 / 252 604 144<br>
               <strong>Toll Free:</strong> 2017<br>
@@ -902,6 +1009,24 @@
       openEffect: 'fade',
       closeEffect: 'fade',
     });
+  </script>
+
+  <script>
+    function toggleReadMore() {
+      var dots = document.getElementById("dots");
+      var moreText = document.getElementById("more");
+      var btnText = document.getElementById("readMoreBtn");
+  
+      if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "Read more";
+        moreText.style.display = "none";
+      } else {
+        dots.style.display = "none";
+        btnText.innerHTML = "Read less";
+        moreText.style.display = "inline";
+      }
+    }
   </script>
 
 </body>

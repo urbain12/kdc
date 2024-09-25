@@ -788,9 +788,20 @@ section {
 }
 
 .about .video-box {
-  background: url("../img/about.avif") center center no-repeat;
-  background-size: cover;
+  position: relative;
   min-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about .video-box video {
+  width: 100%;  /* Adjust width as needed */
+  height: auto;  /* Maintain aspect ratio */
+  max-width: 900px; /* Limit maximum width */
+  max-height: 550px; /* Limit maximum height */
+  object-fit: cover;
+  border-radius: 6px;
 }
 
 .partners{

@@ -125,20 +125,28 @@ def cancel(request,appointmentID):
         appointment.confirmed=False
         appointment.reason= request.POST['reason']
         appointment.save()
-        payload={'details':f'Dear {appointment.names},\nWe are sorry to inform you that your appointment at {appointment.date} has been cancelled due to {request.POST["reason"]}. For rescheduling  your appointment please call +250 782 742 943 / 252 604 144','phone':f'25{appointment.phone}'}
+        payload={'details':f'Dear {appointment.names},\nWe are sorry to inform you that your appointment at {appointment.date},{appointment.time} has been cancelled due to {request.POST["reason"]}. For rescheduling  your appointment please call +250 782 742 943 / 252 604 144','phone':f'25{appointment.phone}'}
         headers = {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdXBjb3VudHJ5LnRpY2tldC5ydy9hcGkvbW9iaWxlL2F1dGhlbnRpY2F0ZSIsImlhdCI6MTcwMjQwMTkzMSwiZXhwIjoxNzAyNDA1NTMxLCJuYmYiOjE3MDI0MDE5MzEsImp0aSI6IkM2dkY1b3V0cXplRGg4TG4iLCJzdWIiOiIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.LqRhq-8muztNIOLwyl8MDV2xXEFnXfJilwJc4E6w7og'}
         r = requests.post('http://upcountry.ticket.rw/api/send-sms-kwetu',
                       headers=headers, data=payload, verify=False)
         return redirect('cancelled')
-    
+
+
+def confirm_page(request,appointmentID):
+    appointment=Appointment.objects.get(id=appointmentID)
+    appointments=Appointment.objects.filter(doctor=appointment.doctor,confirmed=True)
+    return render(request,'useradmin/confirm.html',{'appointments':appointments,'appointment':appointment})
     
 def confirm(request,appointmentID):
     if request.method=="POST":
         appointment=Appointment.objects.get(id=appointmentID)
+        appointment.doctor=request.POST["doctor"]
+        appointment.date=request.POST["date"]
+        appointment.time=request.POST["time"]
         appointment.rejected=False
         appointment.confirmed=True
         appointment.save()
-        payload={'details':f'Dear {appointment.names},\nWe are to inform you that your appointment at {appointment.date} has been confirmed.please call +250 782 742 943 / 252 604 144','phone':f'25{appointment.phone}'}
+        payload={'details':f'Dear {appointment.names},\nWe are to inform you that your appointment at {appointment.date},{appointment.time} has been confirmed.please call +250 782 742 943 / 252 604 144','phone':f'25{appointment.phone}'}
         headers = {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdXBjb3VudHJ5LnRpY2tldC5ydy9hcGkvbW9iaWxlL2F1dGhlbnRpY2F0ZSIsImlhdCI6MTcwMjQwMTkzMSwiZXhwIjoxNzAyNDA1NTMxLCJuYmYiOjE3MDI0MDE5MzEsImp0aSI6IkM2dkY1b3V0cXplRGg4TG4iLCJzdWIiOiIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.LqRhq-8muztNIOLwyl8MDV2xXEFnXfJilwJc4E6w7og'}
         r = requests.post('http://upcountry.ticket.rw/api/send-sms-kwetu',
                       headers=headers, data=payload, verify=False)
@@ -212,7 +220,7 @@ def resendresult(request,Resultid):
 
 def reminder(request,Appointmentid):
     appointment=Appointment.objects.get(id=Appointmentid)
-    payload={'details':f' Dear {appointment.names},\nThis is to remind you that you have an appointment on {appointment.date} at Kigali dematology center. Please call us for any cancellation or delay through +250 782 742 943 / 252 604 144 ','phone':f'25{appointment.phone}'}
+    payload={'details':f' Dear {appointment.names},\nThis is to remind you that you have an appointment on {appointment.date},{appointment.time} at Kigali dematology center. Please call us for any cancellation or delay through +250 782 742 943 / 252 604 144 ','phone':f'25{appointment.phone}'}
     headers = {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdXBjb3VudHJ5LnRpY2tldC5ydy9hcGkvbW9iaWxlL2F1dGhlbnRpY2F0ZSIsImlhdCI6MTcwMjQwMTkzMSwiZXhwIjoxNzAyNDA1NTMxLCJuYmYiOjE3MDI0MDE5MzEsImp0aSI6IkM2dkY1b3V0cXplRGg4TG4iLCJzdWIiOiIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.LqRhq-8muztNIOLwyl8MDV2xXEFnXfJilwJc4E6w7og'}
     r = requests.post('http://upcountry.ticket.rw/api/send-sms-kwetu',headers=headers, data=payload, verify=False)
     return redirect('appointments_list')
