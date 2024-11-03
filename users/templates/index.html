@@ -382,6 +382,8 @@
               <div class="member-info">
                 <h4>Dr Sadah Uwase</h4>
                 <span>Dermatologist</span>
+                <p id="bio">
+                
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>
@@ -398,6 +400,37 @@
               <div class="member-info">
                 <h4>Dr Antoine Burabyo Rudasigwa</h4>
                 <span>Dermatologist</span>
+                Dr. Antoine Rudasigwa Burabyo is a highly skilled consultant dermatovenereologist dedicated to clinical excellence and patient care. 
+                <span id="dots3">...</span>
+                <span id="more3" style="display: none;">
+                  I earned my Bachelor of Medicine from University of Rwanda(UR), in
+                  2003, followed by a medical internship in different Teaching Hospital in
+                  Rwanda committed advancing my expertise.
+                  I served at Rwanda Medical Referral and Teaching Hospital(RMRTH)
+                  before pursuing specialized training in Dermatology.
+                  I was certified for the Advanced Dermatosurgery course through the
+                  Tuebingen University in Germany, in 2015.
+                  In 2016, I was awarded a fellowship from Kilimanjaro Christian Medical
+                  College(KCMCo) at Regional Dermatology Training Center(RDTC), in
+                  Moshi Tanzania and subsequently obtained a master of
+                  Medicine(MMed) in Dermatovenereology. I bring extensive experience
+                  from my tenure at Rwanda Medical Referral and Teaching Hospital
+                  where I worked as a junior consultant from 2016 to 2020 then as
+                  consultant from 2020 up to now, candidate senior consultant next year
+                  2025. Since 2016, i work as well as part time at Kigali Dermatology
+                  Center(KDC)which is one of the specialized Dermatology Clinic we have
+                  in country. Head of Department(HOD) of dermatology department at
+                  Rwanda Medical Referral and Teaching Hospital from September 2020
+                  up to now.
+                  Dedicated to providing culturally sensitive care, I value the opportunity
+                  to share my knowledge with both patients and Peers.
+                  
+                  My special interests include dermatosurgery, Mohs surgery, oncology
+                  dermatology, PRP, hair transplant and cosmetic dermatology.
+                  I strive to make a positive impact in the lives of my patients.
+                </span>
+              </p>
+              <a href="javascript:void(0);" onclick="toggleReadMore3()" id="readMoreBtn3">Read more</a>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>
@@ -414,6 +447,18 @@
               <div class="member-info">
                 <h4>Dr Frida Bazirisa</h4>
                 <span>Dermatologist</span>
+                <p id="bio">
+                  Holds a master’s degree in Dermatology from Mbarara University of Science and Technology(MUST) , Uganda, 2016), BMBS from University of Rwanda, 2007 
+                  <span id="dots4">...</span>
+                  <span id="more4" style="display: none;">
+                    She works as a clinician and clinical instructor at Kigali University Teaching
+                    Hospital(CHUK),Rwanda , a part-timer at Kigali dermatology Centre.
+                    She participates in the development of clinical guidelines in the department.
+                    She worked at Rwamagana provincial hospital for 18 months , a member of Rwanda
+                    dermatology society and is interested in reading updated dermatological diseases articles
+                  </span>
+                </p>
+                <a href="javascript:void(0);" onclick="toggleReadMore4()" id="readMoreBtn4">Read more</a>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>
@@ -437,7 +482,7 @@
           <thead>
               <tr>
                   <th>Doctor</th>
-                  <th>Days Worked</th>
+                  <th>Consultations days</th>
               </tr>
           </thead>
           <tbody>
@@ -1023,6 +1068,60 @@
         moreText.style.display = "none";
       } else {
         dots.style.display = "none";
+        btnText.innerHTML = "Read less";
+        moreText.style.display = "inline";
+      }
+    }
+  </script>
+
+  <script>
+    function toggleReadMore2() {
+      var dots = document.getElementById("dots");
+      var moreText = document.getElementById("more");
+      var btnText = document.getElementById("readMoreBtn");
+  
+      if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "Read more";
+        moreText.style.display = "none";
+      } else {
+        dots.style.display = "none";
+        btnText.innerHTML = "Read less";
+        moreText.style.display = "inline";
+      }
+    }
+  </script>
+
+  <script>
+    function toggleReadMore3() {
+      var dots3 = document.getElementById("dots3");
+      var moreText = document.getElementById("more3");
+      var btnText = document.getElementById("readMoreBtn3");
+  
+      if (dots3.style.display === "none") {
+        dots3.style.display = "inline";
+        btnText.innerHTML = "Read more";
+        moreText.style.display = "none";
+      } else {
+        dots3.style.display = "none";
+        btnText.innerHTML = "Read less";
+        moreText.style.display = "inline";
+      }
+    }
+  </script>
+
+  <script>
+    function toggleReadMore4() {
+      var dots4 = document.getElementById("dots4");
+      var moreText = document.getElementById("more4");
+      var btnText = document.getElementById("readMoreBtn4");
+  
+      if (dots4.style.display === "none") {
+        dots4.style.display = "inline";
+        btnText.innerHTML = "Read more";
+        moreText.style.display = "none";
+      } else {
+        dots4.style.display = "none";
         btnText.innerHTML = "Read less";
         moreText.style.display = "inline";
       }
