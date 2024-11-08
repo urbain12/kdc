@@ -382,7 +382,17 @@
               <div class="member-info">
                 <h4>Dr Sadah Uwase</h4>
                 <span>Dermatologist</span>
+
                 <p id="bio">
+                  Uwase Sadah is Board-certified Dermatologist with demostrated record of leading, growing and
+                  <span id="dots1">...</span>
+                  <span id="more1" style="display: none;">
+                    developing dermatology practice whille serving as key clinical member. Provides high-quality care for patients
+                    presenting with dermatologic conditions in outpatient adn inpatient settings. Maintains care and safety of patients and 
+                    education on cosmetic issues
+                  </span>
+                </p>
+                <a href="javascript:void(0);" onclick="toggleReadMore1()" id="readMoreBtn1">Read more</a>
                 
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
@@ -400,6 +410,7 @@
               <div class="member-info">
                 <h4>Dr Antoine Burabyo Rudasigwa</h4>
                 <span>Dermatologist</span>
+              <p id="bio">
                 Dr. Antoine Rudasigwa Burabyo is a highly skilled consultant dermatovenereologist dedicated to clinical excellence and patient care. 
                 <span id="dots3">...</span>
                 <span id="more3" style="display: none;">
@@ -1075,10 +1086,10 @@
   </script>
 
   <script>
-    function toggleReadMore2() {
-      var dots = document.getElementById("dots");
-      var moreText = document.getElementById("more");
-      var btnText = document.getElementById("readMoreBtn");
+    function toggleReadMore1() {
+      var dots = document.getElementById("dots1");
+      var moreText = document.getElementById("more1");
+      var btnText = document.getElementById("readMoreBtn1");
   
       if (dots.style.display === "none") {
         dots.style.display = "inline";
